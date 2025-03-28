@@ -1,22 +1,5 @@
 # Lista_02.md
 
-# Instruções
-
-- Faça uma cópia deste arquivo .md para um repositório próprio
-- Resolva as 6 questões objetivas assinalando a alternativa correta
-- Resolva as 4 questões dissertativas escrevendo no próprio arquivo .md
-  - lembre-se de utilizar as estruturas de código como ``esta aqui com ` `` ou
-```javascript
-//esta aqui com ```
-let a = "olá"
-let b = 10
-print(a)
-```
-- Resolva as questões com uso do Visual Studio Code ou ambiente similar.
-- Teste seus códigos antes de trazer a resposta para cá.
-- Cuidado com ChatGPT e afins: entregar algo só para ganhar nota não faz você aprender e ficar mais inteligente. Não seja dependente da máquina! (E não se envolva em plágio!)
-- ao final, publique seu arquivo lista_02.md com as respostas em seu repositório, e envie o link pela Adalove. 
-
 # Questões objetivas
 
 **1)** Considere o seguinte código JavaScript:
@@ -51,7 +34,7 @@ C) O código avalia a expressão booleana, imprime `true` e, em seguida, verific
 
 D) O código avalia a expressão booleana, imprime `false` e ordena os valores em ordem crescente.
 
-
+**RESPOSTA**: Alternativa **A**
 ______
 
 **2)** O código a seguir contém duas funções que calculam o limite de crédito de um cliente com base nos seus gastos e na renda mensal.
@@ -112,6 +95,8 @@ B) analisarCredito1() exibirá: 'Seu crédito foi negado. Saldo disponível: -60
 C) analisarCredito1() exibirá: 'Seu crédito foi negado. Saldo disponível: -200.', enquanto analisarCredito2() exibirá: 'Seu crédito foi aprovado. Saldo disponível: 100.'
 
 D) Ambas as funções exibirão: 'Seu crédito foi aprovado Saldo disponível: 500.'
+
+**RESPOSTA**: Alternativa **C**
 ______
 
 **3)** Considere o seguinte trecho de código em JavaScript:
@@ -136,6 +121,8 @@ B) O código verifica se a idade pertence à faixa adulta. Se for, exibe "Você 
 C) O código verifica se a idade está entre 18 e 60 anos e, se for, imprime "Você é um adulto!". Se não estiver nesse intervalo, imprime "Você está na melhor idade!".
 
 D) O código verifica se a idade é menor de 18, entre 18 e 60 ou acima de 60, imprimindo uma mensagem específica para cada caso.
+
+**RESPOSTA**: Alternativa **B**
 ______
 
 **4)** Qual será o resultado impresso no console após a execução do seguinte código?
@@ -205,6 +192,7 @@ Dispositivo 4 não pode ser ligado. Energia insuficiente.
 
 Dispositivo 5 não pode ser ligado. Energia insuficiente.
 
+**RESPOSTA**: Alternativa **D**
 ______
 
 **5)** Qual é a principal função do método update() em um jogo desenvolvido com Phaser.js?
@@ -218,6 +206,8 @@ B) O método update() é chamado continuamente a cada quadro (frame) do jogo, se
 C) O método update() renderiza todos os sprites na tela e garante que a física do jogo seja processada corretamente.
 
 D) O método update() é chamado apenas uma vez após a criação da cena, sendo utilizado para configurar variáveis iniciais do jogo.
+
+**RESPOSTA**: Alternativa **B**
 ______
 
 **6)** Qual é o principal objetivo do módulo Matter.js Physics em Phaser.js?
@@ -232,6 +222,7 @@ C) Renderizar gráficos otimizados para jogos 2D e garantir uma taxa de quadros 
 
 D) Criar animações automáticas para sprites e objetos interativos sem necessidade de programação de movimentação.
 
+**RESPOSTA**: Alternativa **A**
 ______
 
 # Questões dissertativas
@@ -342,6 +333,32 @@ Considere a fórumla de atualização velocidade:
     velocidade = velocidadeInicial - desaceleracao * tempo
 ```
 Seu programa deve determinar quanto tempo será necessário para que a sonda atinja uma velocidade segura de pouso, sem ultrapassar os limites estabelecidos.
+
+
+RESPOSTA: 
+
+```javascript
+function simularPouso(velocidadeInicial, velocidadeSegura, desaceleracao, tempoMaximo) {
+    let tempo = 0;
+
+    while (tempo < tempoMaximo) {
+        let velocidade = velocidadeInicial - desaceleracao * tempo; 
+
+        if (velocidade <= velocidadeSegura) {
+            console.log(`Será necessário`, tempo, `segundos para que a sonda atinja uma velocidade segura sem ultrapassar o limite`);
+            return;
+        }
+        
+        tempo++;
+    }
+
+    console.log("Tempo máximo atingido antes de alcançar velocidade segura.");
+}
+
+simularPouso(2950, 500, 50, 50);
+console.log('-------------------')
+simularPouso(2951, 500, 50, 50); 
+```
 ______
 
 **10)** Em um sistema de análise financeira, as operações de investimento de uma empresa podem ser representadas por matrizes, onde cada linha representa um tipo de investimento e cada coluna representa um período de tempo.
@@ -374,3 +391,40 @@ Escrever("Total de investimentos acumulados:")
 ImprimirMatriz(totalInvestimentos)  
 ```
 Agora, implemente a função MultiplicarMatrizesInvestimento(matrizA, matrizB), que multiplica as duas matrizes, simulando o efeito de diferentes fatores de crescimento e impacto financeiro nos investimentos ao longo do tempo.
+
+RESPOSTA: 
+
+```javascript
+function MultiplicarMatrizesInvestimento(matrizA, matrizB) {
+    // Verifica se a multiplicação é possível (colunas de A == linhas de B)
+    if (matrizA[0].length !== matrizB.length) {
+        return "As matrizes não podem ser multiplicadas. Dimensões incompatíveis.";
+    }
+    
+    let linhas_A = matrizA.length;
+    let colunas_A = matrizA[0].length;
+    let colunas_B = matrizB[0].length;
+    
+    // Criar a matriz resultado com zeros
+    let matrizResultado = Array.from({ length: linhas_A }, () => Array(colunas_B).fill(0));
+    
+    // Multiplicação das matrizes
+    for (let i = 0; i < linhas_A; i++) {
+        for (let j = 0; j < colunas_B; j++) {
+            for (let k = 0; k < colunas_A; k++) { // Também é o número de linhas de B
+                matrizResultado[i][j] += matrizA[i][k] * matrizB[k][j];
+            }
+        }
+    }
+    
+    return matrizResultado;
+}
+
+// Exemplo de uso da função
+let investimentosAno1 = [[1000, 2000], [1500, 2500]];
+let fatoresCrescimento = [[1.1, 0.9], [0.8, 1.2]]; // Fatores de crescimento
+
+let resultado = MultiplicarMatrizesInvestimento(investimentosAno1, fatoresCrescimento);
+console.log("Resultado da multiplicação das matrizes de investimento:");
+resultado.forEach(linha => console.log(linha)); 
+```
