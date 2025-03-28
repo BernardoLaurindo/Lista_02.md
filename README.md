@@ -253,11 +253,11 @@ RESPOSTA:
 ```javascript
 function classificarPedido(valorCompra) {
     if (valorCompra < 50) {
-        return "Frete não disponível!";
+        return "Frete não disponível! Pois o Valor da compra foi de R$";
     } else if (valorCompra >= 50 && valorCompra <= 199.99) {
-        return "Frete com custo adicional!";
+        return "Frete com custo adicional! Pois o Valor da compra foi de R$";
     } else {
-        return "Frete grátis!";
+        return "Frete grátis! Pois o Valor da compra foi de R$";
     }
 }
 
@@ -267,7 +267,7 @@ let produtoB = 90;
 let produtoC = 40;
 let valorTotal = produtoA + produtoB + produtoC;
 
-console.log(classificarPedido(valorTotal) + ' Pois o Valor da compra foi de R$', valorTotal); 
+console.log(classificarPedido(valorTotal) + valorTotal); 
 ```
 ______
 
@@ -286,6 +286,49 @@ Método CalcularConsumo():
 ```
 Implementação genérica para cálculo de consumo, a ser sobrescrita pelas subclasses.
 Agora, implemente as classes Carro e Moto, garantindo que ambas herdem de Veiculo e possuam métodos específicos para calcular o consumo de combustível com base na quilometragem e eficiência do veículo.
+
+RESPOSTA: 
+
+```javascript
+class Veiculo {
+    constructor(modelo, ano) {
+        this.modelo = modelo;
+        this.ano = ano;
+    }
+    
+    calcularConsumo() {
+        return 0; // Método genérico pra ser sobrescrito
+    }
+}
+
+class Carro extends Veiculo {
+    constructor(modelo, ano, eficiencia) {
+        super(modelo, ano);
+        this.eficiencia = eficiencia; // km por litro
+    }
+    
+    calcularConsumo(quilometragem) {
+        return this.eficiencia > 0 ? quilometragem / this.eficiencia : "Eficiência inválida";
+    }
+}
+
+class Moto extends Veiculo {
+    constructor(modelo, ano, eficiencia) {
+        super(modelo, ano);
+        this.eficiencia = eficiencia; // km por litro
+    }
+    
+    calcularConsumo(quilometragem) {
+        return this.eficiencia > 0 ? quilometragem / this.eficiencia : "Eficiência inválida";
+    }
+}
+
+const carro = new Carro("Volkswagen Polo", 2022, 12);
+console.log(`O carro modelo ${carro.modelo}, ano ${carro.ano}, consome ${carro.calcularConsumo(240)} litros para percorrer 240 km.`);
+
+const moto = new Moto("Fazer 25", 2023, 20);
+console.log(`A moto modelo ${moto.modelo}, ano ${moto.ano}, consome ${moto.calcularConsumo(200)} litros para percorrer 200 km.`);
+```
 ______
 
 **9)** Você é um cientista da NASA e está ajudando no desenvolvimento de um sistema de pouso para sondas espaciais em Marte. Seu objetivo é calcular o tempo necessário para que a sonda reduza sua velocidade até um nível seguro para pouso, considerando uma velocidade inicial de entrada na atmosfera marciana e uma taxa de desaceleração constante causada pelo atrito atmosférico e retrofoguetes.
